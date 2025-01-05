@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/nestedtext-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/nestedtext-{{ version }}.tar.gz
   sha256: 0a58fe2789535139b9eb532b7bb6e810e5e288421b061eab6c942839e88a796d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - flit-core >=2,<4
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - inform >=1.28
 
 test:
@@ -30,6 +30,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   summary: human readable and writable data interchange format
